@@ -1,0 +1,64 @@
+﻿@model Golazo.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@*@ViewBag.Title*@</h2>
+
+<div class="row" style="background-color:whitesmoke">
+    <div class="col-md-7">
+        <section id="loginForm">
+            <h3>Sign Up </h3>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+            <div class="jumbotron">
+                <h4 class="title">Create a new account</h4>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+             
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Register" />
+                        <a class="LinkButton" href="~/Account/Login">Cancel</a>
+                        @*@Html.ActionLink("Cancel", "Login")*@
+                    </div>
+                </div>
+
+
+
+            </div>
+            }
+        </section>
+    </div>
+    <div class="col-md-5" style="float:left;">
+        <section id="socialLoginForm">
+            <h3>Sign Up with Social Media</h3>
+            <div>
+                <img src="~/Images/social2.JPG" style="width: 100%;height: 405px !important;padding-top: 69px;padding-bottom: 110px;" />
+            </div>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

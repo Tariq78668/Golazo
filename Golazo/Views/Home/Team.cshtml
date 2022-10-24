@@ -1,0 +1,98 @@
+﻿@using System.Linq
+@using Golazo.Models
+@model Golazo.Models.Team
+@{
+    ViewBag.Title = "Team";
+}
+
+<h2>@*@ViewBag.Title*@</h2>
+
+<div class="row" style="background-color:white">
+    <div class="col-md-7">
+        @if (Model == null)
+        {
+            <h4 class="title">Create team</h4>
+
+            using (Html.BeginForm("Team", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="jumbotron">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" class="btn btn-default" value="Create" />
+                            <a class="LinkButton" href="~/Home/Team">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.TeamMember)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MemberID }) |
+                          5555555555
+                            @Html.ActionLink("Details", "Details", new { id = item.MemberID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MemberID })
+                        </td>*@
+                    </tr>
+                }
+            </table>
+            <div>
+                @*<a href="~/Home/Index">Add Team Member</a>*@
+                <h4 class="title" onclick="ToggleDiv('first');return false;">Add Team Member</h4>
+            </div>
+
+            <div id="dvFirstDiv" style="display: none;">
+              @*  @Html.DropDownListFor(model => model.TeamMember, ViewBag.CityList as SelectList, new { @class = "form-control" })*@
+              @*  @Html.ValidationMessageFor(model => model.TeamMember, "", new { @class = "text-danger" })*@
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="AddMember" />
+                        <a class="LinkButton" href="~/Home/Team">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        function ToggleDiv(Flag) {
+            if (Flag == "first") {
+                document.getElementById('dvFirstDiv').style.display = 'block';
+                document.getElementById('dvSecondDiv').style.display = 'none';
+            }
+            else {
+                document.getElementById('dvFirstDiv').style.display = 'none';
+                document.getElementById('dvSecondDiv').style.display = 'block';
+            }
+        }
+    </script>
+}

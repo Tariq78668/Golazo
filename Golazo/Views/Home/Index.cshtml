@@ -1,0 +1,101 @@
+﻿@model Golazo.Models.Scheduler
+@{
+    ViewBag.Title = "Home";
+
+}
+
+
+<div  style="background-color:rgb(255,255,255,0.7);border-radius:inherit">
+    <p>
+        <div class="text-left col-md-6">
+            @Html.ActionLink("Create New Booking", "Create", "Scheduler")
+        </div>
+        <div class="text-right col-md-6">
+            @Html.ActionLink("Create New Team", "Create", "Teams")
+        </div>
+
+        <div id="calender" >
+
+
+        </div>
+    </p>
+   
+
+  
+
+
+
+</div>
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+
+    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
+    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+    <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
+    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            var events = [];
+            $.ajax({
+                type: "Get",
+                url: "/Home/GetEvents",
+                success: function (data) {
+                   
+                    $.each(data, function (i, v) {
+                        events.push({
+
+                            title: v.GroundName,
+                            Description: 'GolazoStadium',
+                            start: moment(v.StartTime),
+                            end: moment(v.EndTime),
+                            backgroundColor: "#9501fc",
+                            borderColor: "#fc0101",
+                            allDay: false
+                        })
+
+                    })
+
+                    GenerateCalendar(events);
+                },
+                error: function (error) {
+
+                    alert('failes');
+                }
+
+
+
+            });
+            function GenerateCalendar(events) {
+
+                $('#calender').fullCalendar('destroy');
+
+                $('#calender').fullCalendar({
+                    contentHeight: 600,
+                    defaultDate: new Date(),
+                    timeformat: 'h(:mm)a',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,basicWeek,basicDay'
+                    },
+                    eventlimit: true,
+                    eventColor: '#378006',
+                    events: events
+
+                })
+            }
+
+        })
+    </script>
+
+
+} 

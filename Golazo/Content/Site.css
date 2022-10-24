@@ -1,0 +1,84 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url('../Images/backgroundImage2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.wrapper {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.center {
+    position: relative;
+    min-height: 100px;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    float: left;
+    padding-top: 6%;
+}
+
+.left {
+    position: relative;
+    min-height: 1px;
+    padding-right: 3px;
+    padding-left: 3px;
+    width: 18%;
+    float: left;
+}
+
+.sideImage {
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 250px !important;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    float: inherit;
+}
+
+.footer {
+    background-color: #222;
+    border-color: #080808;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.title {
+    color: darkred;
+    text-decoration-line: underline;
+}
+
+.LinkButton {
+    font: 14px Arial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+    padding: 6px 12px !important;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+}
